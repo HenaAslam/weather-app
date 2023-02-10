@@ -26,6 +26,7 @@ const fetchWeather=async()=>{
         const data = await response.json();
        
         setWeather(data);
+        console.log(data)
         setLat(data.coord.lat)
         setLon(data.coord.lon)
     
@@ -44,6 +45,7 @@ const fetchWeather=async()=>{
         <Col xs={12} md={6}>
         <Form onSubmit={handleSubmit}>
             <Row>
+                <h2 className="main-title mb-4">Weather in your city</h2>
                 <Col xs={9}>
 
                     

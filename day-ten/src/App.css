@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+.city{
+  color: #e96e50;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight:700
+}
+.main-title{
+  color: #e96e50;
+  font-size: 30px;
+  font-family: "Space Grotesk", Arial, sans-serif !important;
+
+}
