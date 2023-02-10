@@ -1,6 +1,6 @@
 import { useEffect , useState} from "react"
 import NextFiveDetails from "./NextFiveDetails"
-import { ListGroup , Container, Row, Col} from "react-bootstrap"
+import { Container, Row, } from "react-bootstrap"
 
 const NextFive=(props)=>{
 
@@ -22,6 +22,7 @@ const NextFive=(props)=>{
        
             );
             const data = await response.json();
+            console.log(data)
       
             setWeather(data)    
             
@@ -38,10 +39,10 @@ const NextFive=(props)=>{
             <>
 
 <Container className='mt-5'>
+<h4 className="main-title">Forcast for next couple of hours. </h4>
  <Row className="justify-content-md-center">
-            <Col md="auto">
-             <h6 className="next">Weather for next 5 days</h6>
-             <ListGroup>
+           
+ 
             
              {weather.list !== undefined && ( weather.list.map((w)=>
 
@@ -50,8 +51,7 @@ const NextFive=(props)=>{
 
 )) }
             
-             </ListGroup>
-             </Col>
+
           </Row>
             </Container>
           

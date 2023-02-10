@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
  import Details from './Details'
  import NextFive from "./NextFive";
+//  import TimeandDate from "./TimeandDate"
 
 const Weather = () => {
+
   const [weather, setWeather] = useState({});
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Hamburg");
   const [error, setError] = useState(null);
 
   const[lat,setLat]=useState('')
@@ -18,6 +20,10 @@ const Weather = () => {
     fetchWeather();
 };
 
+useEffect(()=>{
+    fetchWeather()
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[])
 const fetchWeather=async()=>{
     try {
         const response = await fetch(
@@ -38,18 +44,23 @@ const fetchWeather=async()=>{
  
 
   return (
-    <Container className="my-5">
+    <>
+
+    <h2 className="main-title mb-4 ml-5 mt-5">Weather in your city</h2>
+    <hr></hr>
+    <Container fluid  className=" jumbotron">
       <Row className="justify-content-md-center">
 
    
         <Col xs={12} md={6}>
         <Form onSubmit={handleSubmit}>
             <Row>
-                <h2 className="main-title mb-4">Weather in your city</h2>
-                <Col xs={9}>
+            
+                <Col xs={10}>
 
                     
               <Form.Control
+              className="rounded-pill "
                 type="text"
                 placeholder="Enter city name"
                 value={city}
@@ -57,9 +68,9 @@ const fetchWeather=async()=>{
               />
 
                 </Col>
-                <Col xs={3}>
+                <Col xs={2}>
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" className="submit rounded-pill">
               Submit
             </Button>
                
@@ -75,6 +86,7 @@ const fetchWeather=async()=>{
             </Form>
         </Col>
       </Row>
+      </Container>
       {error && (
         <Row className="justify-content-md-center">
           <Col md="auto">
@@ -84,12 +96,14 @@ const fetchWeather=async()=>{
       )}
       {weather.name && (
         <>
+        {/* <TimeandDate city={weather}/> */}
        <Details city={weather} />
         <NextFive lat={lat} lon={lon} />
         </>
       )}
        
-    </Container>
+    
+    </>
   );
 };
 
