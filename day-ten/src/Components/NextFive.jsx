@@ -40,7 +40,7 @@ const NextFive=(props)=>{
 <Container className='mt-5'>
  <Row className="justify-content-md-center">
             <Col md="auto">
-             <h6>Weather for next 5 days</h6>
+             <h6 className="next">Weather for next 5 days</h6>
              <ListGroup>
             
              {weather.list !== undefined && ( weather.list.map((w)=>
