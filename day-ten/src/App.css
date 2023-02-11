@@ -93,3 +93,18 @@
     font-size: 12px;
   }
 }
+.err h1{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 80px;
+  text-align: center;
+}
+.err h6{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  text-align: center;
+  
+
+}
+.submit:focus{
+  background-color: #f09656;
+}

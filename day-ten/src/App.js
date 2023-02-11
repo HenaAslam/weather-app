@@ -5,6 +5,7 @@ import NavbarComponent from './Components/NavbarComponent';
 import Weather from './Components/Weather';
 import  {BrowserRouter, Routes ,Route} from 'react-router-dom'
 import NextFive from './Components/NextFive';
+import NotFound from './Components/NotFound';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
      
       <Route element={ <Weather />} path="/"/>
       <Route element={<NextFive/>} path="/details/:city"/>
+      <Route element={<NotFound/>} path="*" />
      
       </Routes>
      

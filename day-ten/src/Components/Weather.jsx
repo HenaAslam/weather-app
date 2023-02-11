@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col,Alert } from "react-bootstrap";
  import Details from './Details'
 
 //  import TimeandDate from "./TimeandDate"
@@ -28,7 +28,7 @@ const fetchWeather=async()=>{
           `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0fe4d1536d77cdbc2bf8d6d7e5c8a79f`
         );
         const data = await response.json();
-       
+    
         setWeather(data);
         console.log(data)
       
@@ -93,6 +93,15 @@ const fetchWeather=async()=>{
           </Col>
         </Row>
       )}
+         {/* if(data.){
+        console.log("hello")
+       } */}
+       {weather.message==="city not found" && (<Alert variant="warning" >
+        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+        <p>
+        Please enter a valid city to see the weather.
+        </p>
+      </Alert>)}
       {weather.name && (
         <>
         {/* <TimeandDate city={weather}/> */}
