@@ -4,7 +4,7 @@ import { Form, Button, Container, Row, Col,Alert } from "react-bootstrap";
 
  import Details from './Details'
 
-//  import TimeandDate from "./TimeandDate"
+  import TimeandDate from "./TimeandDate"
 
 const Weather = () => {
 
@@ -19,6 +19,7 @@ const Weather = () => {
     setWeather({});
     setError(null);
     fetchWeather();
+    setCity("")
 };
 
 const handleDelete = (i) => {
@@ -42,10 +43,21 @@ const fetchWeather=async()=>{
     
         setWeather(data);
         console.log(data)
-            setCities([...cities, data]);
-      
+
+
           // setCities([...cities,cities.splice(0,0,data)])
-     
+          // setCities([...cities, data]);
+
+
+
+// let newCountries = [].concat("Mali", countries, "Kenya");
+
+setCities([].concat(data,...cities))
+
+
+          console.log(cities)
+        
+          // arr.splice(2, 0, "Lene");
     
       } catch (error) {
         setError(error);
@@ -64,6 +76,7 @@ const fetchWeather=async()=>{
     <>
 
     <h2 className="main-title mb-4 ml-5 mt-5">Weather in your city</h2>
+     <TimeandDate city={weather}/>
     <hr></hr>
     <Container fluid  className=" jumbotron">
       <Row className="justify-content-md-center">
@@ -127,14 +140,14 @@ const fetchWeather=async()=>{
       </Alert>)}
       {weather.name && (
         <>
-        {/* <TimeandDate city={weather}/> */}
+       
 
 
                  {cities.map((cityData, index) => (
         
       //  <Details city={weather} />
     
-      <Details key={index} city={cityData} delete={handleDelete}/>
+      <Details key={index} city={cityData} delete={handleDelete} del={index}/>
   
 
 

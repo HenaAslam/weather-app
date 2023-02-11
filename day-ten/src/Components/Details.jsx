@@ -50,8 +50,7 @@ const Details=(props)=>{
 
             <Container className='mt-5 pb-4 mb-2' style={{borderBottom:"1px solid grey"}}>
  <Row className="justify-content-md-center">
-  
-            <Col xs={2} className="mt-2">
+              <Col xs={2} className="mt-2">
                {getImage(props.city.weather[0].id)}
             </Col>
 
@@ -72,8 +71,10 @@ const Details=(props)=>{
               <Button variant="outline-dark " className="btn-sm mb-5 submit ml-0" onClick={()=>{
                navigate('/details/'+[props.city.coord.lat,props.city.coord.lon])
               }}>More info</Button>
-                 <Button variant="outline-dark " className="btn-sm mb-5 submit ml-3" onClick={()=>{
-      props.delete()
+                 <Button variant="outline-dark " className="btn-sm mb-5 submit ml-3" onClick={(e)=>{
+                
+
+      props.delete(props.del)
        }}>Delete</Button>
                  
             </Col>

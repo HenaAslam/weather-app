@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Container } from "react-bootstrap"
+
 
 
 
@@ -18,12 +18,12 @@ const [time, setTime]= useState(Date().toLocaleString())
 
 
     
-  <Container>
 
-  <h6>{time}</h6>
+
+  <h6 className="ml-5"><strong>{time}</strong></h6>
  
 
-  </Container>
+
         
         </>
     )
