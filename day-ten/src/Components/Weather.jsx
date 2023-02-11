@@ -12,6 +12,8 @@ const Weather = () => {
   const [city, setCity] = useState("Hamburg");
   const [cities, setCities] = useState([]);
   const [error, setError] = useState(null);
+
+  const[isLoading,setIsLoading]=useState(true)
   
 
   const handleSubmit =  (event) => {
@@ -42,7 +44,8 @@ const fetchWeather=async()=>{
         const data = await response.json();
     
         setWeather(data);
-        console.log(data)
+        setIsLoading(false)
+        // console.log(data)
 
 
           // setCities([...cities,cities.splice(0,0,data)])
@@ -55,12 +58,13 @@ const fetchWeather=async()=>{
 setCities([].concat(data,...cities))
 
 
-          console.log(cities)
+          // console.log(cities)
         
           // arr.splice(2, 0, "Lene");
     
       } catch (error) {
         setError(error);
+        setIsLoading(false)
        
       }
 }
@@ -74,7 +78,7 @@ setCities([].concat(data,...cities))
 
   return (
     <>
-
+     
     <h2 className="main-title mb-4 ml-5 mt-5">Weather in your city</h2>
      <TimeandDate city={weather}/>
     <hr></hr>
@@ -147,7 +151,7 @@ setCities([].concat(data,...cities))
         
       //  <Details city={weather} />
     
-      <Details key={index} city={cityData} delete={handleDelete} del={index}/>
+      <Details key={index} city={cityData} delete={handleDelete} del={index} load={isLoading}/>
   
 
 

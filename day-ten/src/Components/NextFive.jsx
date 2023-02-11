@@ -32,12 +32,12 @@ const[isLoading,setIsLoading]=useState(true)
             );
             const data = await response.json();
             console.log(data)
-            setIsLoading(false)
+             setIsLoading(false)
             setWeather(data)    
             
           } catch (error) {
           console.log(error)
-          setIsLoading(false)
+           setIsLoading(false)
           }
     }
 
@@ -51,11 +51,11 @@ const[isLoading,setIsLoading]=useState(true)
     weather.city && (
             <>
 
-
+<div className="text-center mt-4">{isLoading&& (  <Spinner animation="border" variant="warning" />)}</div>
 
 <Container className='mt-5'>
 <h4 className="main-title">Forcast for next couple of hours. </h4>
-<div className="text-center mt-4">{isLoading && (  <Spinner animation="border" variant="warning" />)}</div>
+
  <Row className="justify-content-md-center">
            
 
@@ -63,7 +63,7 @@ const[isLoading,setIsLoading]=useState(true)
              {weather.list !== undefined && ( weather.list.map((w)=>
 
 
-                <NextFiveDetails details={w}  key={w.dt}/>
+                <NextFiveDetails details={w}  key={w.dt} load={isLoading}/>
 
 )
 

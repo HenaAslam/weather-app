@@ -1,9 +1,19 @@
-import {Row, Col, Container, Badge,Button} from 'react-bootstrap'
+import {Row, Col, Container, Badge,Button,Spinner } from 'react-bootstrap'
 import Cards from './Cards'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+
+
 const Details=(props)=>{
         
+  // const sunrise=new Date(props.city.sys.sunrise*1000)
+  // const sunset=new Date(props.city.sys.sunset*1000)
+  let sunrise=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(props.city.sys.sunrise*1000);
+  let sunset=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(props.city.sys.sunset*1000);
+const  sr = sunrise.split(',');
+const  ss=sunset.split(",")
+
+
 
     const navigate=useNavigate()
 
@@ -46,7 +56,9 @@ const Details=(props)=>{
            
 
          (
-     
+          <>
+         <div className="text-center mt-4">{props.load&& (  <Spinner animation="border" variant="warning" />)}</div>
+
 
             <Container className='mt-5 pb-4 mb-2' style={{borderBottom:"1px solid grey"}}>
  <Row className="justify-content-md-center">
@@ -68,6 +80,15 @@ const Details=(props)=>{
              <p className='degree mt-2'>Geo coords [<span style={{color:"#e96e50"}}>{props.city.coord.lat},{props.city.coord.lon}</span> ]</p>
               <p className='degree ' >Humidity: {props.city.main.humidity}%</p>
               <p className='degree '>Feels like: {KtoC(props.city.main.feels_like)} °C</p>
+             
+              {/* {console.log(new Date(props.city.sys.sunrise*1000))} */}
+               <div className="mb-5">
+                
+                <Badge variant="warning">Sunrise:{sr[1]}</Badge> 
+               <Badge variant="secondary" className='ml-5' >Sunset:{ss[1]}</Badge>
+               
+               
+               </div>  
               <Button variant="outline-dark " className="btn-sm mb-5 submit ml-0" onClick={()=>{
                navigate('/details/'+[props.city.coord.lat,props.city.coord.lon])
               }}>More info</Button>
@@ -76,7 +97,8 @@ const Details=(props)=>{
 
       props.delete(props.del)
        }}>Delete</Button>
-                 
+       
+
             </Col>
             
             <Col xs={4} className="mt-2 mr-md-n5">
@@ -92,7 +114,7 @@ const Details=(props)=>{
             </Container>
 
            
-
+            </>
 
 
           )
