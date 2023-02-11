@@ -7,16 +7,19 @@ import  {BrowserRouter, Routes ,Route} from 'react-router-dom'
 import NextFive from './Components/NextFive';
 import NotFound from './Components/NotFound';
 
+
 function App() {
   return (
     <div >
       <BrowserRouter>
       <NavbarComponent />
-      <Routes>
+     
+
+       <Routes>
      
       <Route element={ <Weather />} path="/"/>
       <Route element={<NextFive/>} path="/details/:city"/>
-      <Route element={<NotFound/>} path="*" />
+       <Route element={<NotFound/>} path="*" />
      
       </Routes>
      

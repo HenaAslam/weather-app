@@ -1,5 +1,7 @@
+
 import { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col,Alert } from "react-bootstrap";
+
  import Details from './Details'
 
 //  import TimeandDate from "./TimeandDate"
@@ -8,6 +10,7 @@ const Weather = () => {
 
   const [weather, setWeather] = useState({});
   const [city, setCity] = useState("Hamburg");
+  const [cities, setCities] = useState([]);
   const [error, setError] = useState(null);
   
 
@@ -17,6 +20,14 @@ const Weather = () => {
     setError(null);
     fetchWeather();
 };
+
+const handleDelete = (i) => {
+  const newCities = [...cities];
+  newCities.splice(i, 1);
+  setCities(newCities);
+};
+
+
 
 useEffect(()=>{
     fetchWeather()
@@ -31,7 +42,9 @@ const fetchWeather=async()=>{
     
         setWeather(data);
         console.log(data)
+            setCities([...cities, data]);
       
+          // setCities([...cities,cities.splice(0,0,data)])
      
     
       } catch (error) {
@@ -39,7 +52,12 @@ const fetchWeather=async()=>{
        
       }
 }
+
+
+
  
+
+
  
 
   return (
@@ -52,6 +70,11 @@ const fetchWeather=async()=>{
 
    
         <Col xs={12} md={6}>
+
+
+
+
+
         <Form onSubmit={handleSubmit}>
             <Row>
             
@@ -93,20 +116,30 @@ const fetchWeather=async()=>{
           </Col>
         </Row>
       )}
-         {/* if(data.){
-        console.log("hello")
-       } */}
+      
        {weather.message==="city not found" && (<Alert variant="warning" >
         <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
         <p>
-        Please enter a valid city to see the weather.
+         Enter a valid city to see the weather. Please refresh to continue! :)
         </p>
+        
+       
       </Alert>)}
       {weather.name && (
         <>
         {/* <TimeandDate city={weather}/> */}
-       <Details city={weather} />
-        {/* <NextFive lat={lat} lon={lon} /> */}
+
+
+                 {cities.map((cityData, index) => (
+        
+      //  <Details city={weather} />
+    
+      <Details key={index} city={cityData} delete={handleDelete}/>
+  
+
+
+       ))}
+      
         </>
       )}
        
@@ -116,3 +149,11 @@ const fetchWeather=async()=>{
 };
 
 export default Weather;
+
+
+
+
+
+
+
+

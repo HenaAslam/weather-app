@@ -37,6 +37,8 @@ const Details=(props)=>{
     const KtoC=(k)=>{
         return parseInt(k-273.15)
         }
+      
+      
 
     return(
        
@@ -70,6 +72,10 @@ const Details=(props)=>{
               <Button variant="outline-dark " className="btn-sm mb-5 submit ml-0" onClick={()=>{
                navigate('/details/'+[props.city.coord.lat,props.city.coord.lon])
               }}>More info</Button>
+                 <Button variant="outline-dark " className="btn-sm mb-5 submit ml-3" onClick={()=>{
+      props.delete()
+       }}>Delete</Button>
+                 
             </Col>
             
             <Col xs={4} className="mt-2 mr-md-n5">
