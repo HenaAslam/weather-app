@@ -9,7 +9,7 @@ const Cards=(props)=>{
 <Row className="details-cards">
 
 
-    <Col xs={3}>
+    <Col xs={6} sm={3}>
     <Card  >
   <Card.Body>
    <h6><i className="bi bi-thermometer-high"></i>FEELS LIKE</h6>
@@ -20,7 +20,7 @@ const Cards=(props)=>{
 </Col>
 
 
-<Col xs={3}>
+<Col xs={6} sm={3}>
     <Card  >
   <Card.Body>
    <h6><i className="bi bi-moisture mr-1"></i>Humidity</h6>
@@ -32,7 +32,7 @@ const Cards=(props)=>{
 
 
 
-<Col xs={3}>
+<Col xs={6} sm={3}>
     <Card  >
   <Card.Body>
    <h6><i className="bi bi-cloud-haze mr-1"></i>Pressure</h6>
@@ -42,7 +42,7 @@ const Cards=(props)=>{
 </Card>
 </Col>
 
-<Col xs={3}>
+<Col xs={6} sm={3}>
     <Card  >
   <Card.Body>
    <h6><i className="bi bi-wind mr-1"></i>Wind</h6>

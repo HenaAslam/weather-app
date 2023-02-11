@@ -36,9 +36,9 @@
 }
 
 .anim img{
-  height:140px;
+  height:120px;
  
-  width:140px;
+  width:120px;
 
   animation: App-logo-spin infinite 6s linear;
 }
@@ -56,6 +56,15 @@
   background-color: #f09656;
   height:100px
  
+}
+.details-cards h6{
+  font-size: 12px;
+  font-weight: bold;
+  color:white
+}
+.details-cards h2{
+  color:white;
+  font-size: 26px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -75,12 +84,12 @@
     font-size: 18px;
   }
 }
-.details-cards h6{
-  font-size: 12px;
-  font-weight: bold;
-  color:white
-}
-.details-cards h2{
-  color:white;
-  font-size: 26px;
+@media only screen and (max-width: 560px) {
+  .details-cards .card {
+    height:80px;
+    margin-bottom: 20px;
+  }
+  .details-cards h2{
+    font-size: 12px;
+  }
 }

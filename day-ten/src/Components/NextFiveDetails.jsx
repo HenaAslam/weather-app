@@ -2,15 +2,17 @@
 import { Col,Card} from "react-bootstrap"
 import { parseISO, format } from 'date-fns'
 
+
 const NextFiveDetails=(props)=>{
 
-    
+
+  
     const KtoC=(k)=>{
         return parseInt(k-273.15)
         }
     return(
         <>
-   
+
           
           <Col xs={6} md={3} className="mb-2">
           <Card border="warning" >

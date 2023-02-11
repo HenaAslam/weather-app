@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
  import Details from './Details'
- import NextFive from "./NextFive";
+
 //  import TimeandDate from "./TimeandDate"
 
 const Weather = () => {
@@ -9,9 +9,7 @@ const Weather = () => {
   const [weather, setWeather] = useState({});
   const [city, setCity] = useState("Hamburg");
   const [error, setError] = useState(null);
-
-  const[lat,setLat]=useState('')
-  const[lon,setLon]=useState('')
+  
 
   const handleSubmit =  (event) => {
     event.preventDefault();
@@ -33,11 +31,12 @@ const fetchWeather=async()=>{
        
         setWeather(data);
         console.log(data)
-        setLat(data.coord.lat)
-        setLon(data.coord.lon)
+      
+     
     
       } catch (error) {
         setError(error);
+       
       }
 }
  
@@ -98,7 +97,7 @@ const fetchWeather=async()=>{
         <>
         {/* <TimeandDate city={weather}/> */}
        <Details city={weather} />
-        <NextFive lat={lat} lon={lon} />
+        {/* <NextFive lat={lat} lon={lon} /> */}
         </>
       )}
        

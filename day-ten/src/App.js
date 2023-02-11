@@ -4,7 +4,7 @@ import NavbarComponent from './Components/NavbarComponent';
 
 import Weather from './Components/Weather';
 import  {BrowserRouter, Routes ,Route} from 'react-router-dom'
-import NextFiveDetails from './Components/NextFiveDetails';
+import NextFive from './Components/NextFive';
 
 function App() {
   return (
@@ -14,7 +14,8 @@ function App() {
       <Routes>
      
       <Route element={ <Weather />} path="/"/>
-      {/* <Route element={<NextFiveDetails/>} path="/details/:city"/> */}
+      <Route element={<NextFive/>} path="/details/:city"/>
+     
       </Routes>
      
       
