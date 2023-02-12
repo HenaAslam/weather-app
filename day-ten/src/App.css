@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 .city{
   color: #e96e50;
   font-family: Arial, sans-serif !important;
@@ -107,4 +107,37 @@
 }
 .submit:focus{
   background-color: #f09656;
+}
+.large{
+  font-size: 32px;
+}
+.home{
+  height:90vh;
+ 
+  background-image: url("https://images.unsplash.com/photo-1584267385494-9fdd9a71ad75?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+  
+} 
+
+
+
+.heading{
+  font-family: 'Roboto', sans-serif;
+ color:white
+}
+
+.btn-explore span {
+  max-width: 0;
+  -webkit-transition: max-width 1s;
+  transition: max-width 1s;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.btn-explore:hover span {
+  max-width: 7rem;
 }

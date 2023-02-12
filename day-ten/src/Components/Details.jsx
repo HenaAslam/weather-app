@@ -1,15 +1,16 @@
-import {Row, Col, Container, Badge,Button,Spinner } from 'react-bootstrap'
+import {Row, Col, Container, Badge,Button } from 'react-bootstrap'
 import Cards from './Cards'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+
 
 
 const Details=(props)=>{
         
   // const sunrise=new Date(props.city.sys.sunrise*1000)
   // const sunset=new Date(props.city.sys.sunset*1000)
-  let sunrise=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(props.city.sys.sunrise*1000);
-  let sunset=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(props.city.sys.sunset*1000);
+  let sunrise=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', }).format(props.city.sys.sunrise*1000);
+  let sunset=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', }).format(props.city.sys.sunset*1000);
 const  sr = sunrise.split(',');
 const  ss=sunset.split(",")
 
@@ -57,7 +58,7 @@ const  ss=sunset.split(",")
 
          (
           <>
-         <div className="text-center mt-4">{props.load&& (  <Spinner animation="border" variant="warning" />)}</div>
+        
 
 
             <Container className='mt-5 pb-4 mb-2' style={{borderBottom:"1px solid grey"}}>
@@ -75,7 +76,7 @@ const  ss=sunset.split(",")
                     {props.city.name},{props.city.sys.country} <em style={{color:"black"}}>{props.city.weather[0].description}</em>
                  </h6>
                  </Link>
-                <Badge variant="dark">{KtoC(props.city.main.temp)}°C</Badge>
+                <Badge variant="dark" className={props.del===0? 'large' : ""}>{KtoC(props.city.main.temp)}°C</Badge>
                 <span className='ml-2 degree'>temperature varies from {KtoC(props.city.main.temp_min)}°C to {KtoC(props.city.main.temp_max)}°C, wind {props.city.wind.speed}  m/s, clouds {props.city.clouds.all} %</span>
              <p className='degree mt-2'>Geo coords [<span style={{color:"#e96e50"}}>{props.city.coord.lat},{props.city.coord.lon}</span> ]</p>
               <p className='degree ' >Humidity: {props.city.main.humidity}%</p>
@@ -83,11 +84,17 @@ const  ss=sunset.split(",")
              
               {/* {console.log(new Date(props.city.sys.sunrise*1000))} */}
                <div className="mb-5">
+                <Row>
+                  <Col className="mb-3">
+                  <Badge variant="warning" className="p-2"><i className="bi bi-sunrise mr-1"></i>Sunrise:{sr[1]}</Badge> 
+                  </Col>
+                  <Col >
+                  <Badge variant="secondary" className=' p-2' ><i className="bi bi-sunset mr-1"></i>Sunset:{ss[1]}</Badge>
+                  </Col>
                 
-                <Badge variant="warning">Sunrise:{sr[1]}</Badge> 
-               <Badge variant="secondary" className='ml-5' >Sunset:{ss[1]}</Badge>
                
-               
+               </Row>
+             
                </div>  
               <Button variant="outline-dark " className="btn-sm mb-5 submit ml-0" onClick={()=>{
                navigate('/details/'+[props.city.coord.lat,props.city.coord.lon])

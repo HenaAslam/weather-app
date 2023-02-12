@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Form, Button, Container, Row, Col,Alert } from "react-bootstrap";
+import { Form, Button, Container, Row, Col,Alert,Spinner } from "react-bootstrap";
 
  import Details from './Details'
 
@@ -13,7 +13,7 @@ const Weather = () => {
   const [cities, setCities] = useState([]);
   const [error, setError] = useState(null);
 
-  const[isLoading,setIsLoading]=useState(true)
+  const[isLoading,setIsLoading]=useState(false)
   
 
   const handleSubmit =  (event) => {
@@ -38,13 +38,14 @@ useEffect(()=>{
 },[])
 const fetchWeather=async()=>{
     try {
+      setIsLoading(true)
         const response = await fetch(
           `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0fe4d1536d77cdbc2bf8d6d7e5c8a79f`
         );
         const data = await response.json();
     
         setWeather(data);
-        setIsLoading(false)
+        // setIsLoading(false)
         // console.log(data)
 
 
@@ -56,7 +57,7 @@ const fetchWeather=async()=>{
 // let newCountries = [].concat("Mali", countries, "Kenya");
 
 setCities([].concat(data,...cities))
-
+setIsLoading(false)
 
           // console.log(cities)
         
@@ -64,7 +65,7 @@ setCities([].concat(data,...cities))
     
       } catch (error) {
         setError(error);
-        setIsLoading(false)
+        // setIsLoading(false)
        
       }
 }
@@ -78,7 +79,7 @@ setCities([].concat(data,...cities))
 
   return (
     <>
-     
+         <div className="text-center mt-4">{isLoading&& (  <Spinner animation="border" variant="warning" />)}</div>
     <h2 className="main-title mb-4 ml-5 mt-5">Weather in your city</h2>
      <TimeandDate city={weather}/>
     <hr></hr>
@@ -112,7 +113,7 @@ setCities([].concat(data,...cities))
                 <Button variant="primary" type="submit" className="submit rounded-pill">
               Submit
             </Button>
-               
+          
                 </Col>
               
             </Row>
@@ -145,13 +146,13 @@ setCities([].concat(data,...cities))
       {weather.name && (
         <>
        
-
+    
 
                  {cities.map((cityData, index) => (
         
       //  <Details city={weather} />
-    
-      <Details key={index} city={cityData} delete={handleDelete} del={index} load={isLoading}/>
+   
+      <Details key={index} city={cityData} delete={handleDelete} del={index} />
   
 
 

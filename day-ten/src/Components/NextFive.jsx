@@ -6,13 +6,14 @@ import { useParams } from "react-router-dom"
 
 const NextFive=(props)=>{
 
+  const[isLoading,setIsLoading]=useState(false)
 
     const params = useParams()
     
     const  latAndlon = params.city.split(',');
 console.log(latAndlon);
    
-const[isLoading,setIsLoading]=useState(true)
+
     const[weather, setWeather]=useState({})
 
      useEffect(()=>{
@@ -25,7 +26,7 @@ const[isLoading,setIsLoading]=useState(true)
 
     const fetchWeather=async()=>{
         try {
-
+          setIsLoading(true)
             const response = await fetch(
               "https://api.openweathermap.org/data/2.5/forecast?lat="+latAndlon[0]+"&lon="+latAndlon[1]+"&appid=0fe4d1536d77cdbc2bf8d6d7e5c8a79f"
        
@@ -33,7 +34,8 @@ const[isLoading,setIsLoading]=useState(true)
             const data = await response.json();
             console.log(data)
              setIsLoading(false)
-            setWeather(data)    
+            setWeather(data) 
+            setIsLoading(false)   
             
           } catch (error) {
           console.log(error)
@@ -45,7 +47,7 @@ const[isLoading,setIsLoading]=useState(true)
 
     return(
       
-
+  
        
 
     weather.city && (
