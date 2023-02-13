@@ -28,10 +28,11 @@ const Weather = () => {
     dispatch(getweatherActionAsync(city))
     setCity("")
 };
-
+const weatherFromReduxStore = useSelector((state) => state.weatherDetails.wea)
 const handleDelete = (i) => {
-  const newCities = [...cities];
-  newCities.splice(i, 1);
+  let newCities = weatherFromReduxStore
+  newCities=[...newCities.slice(0, i), ...newCities.slice(i + 1)]
+ 
   // setCities(newCities);
   dispatch({
     type:"DELETE",
@@ -39,11 +40,11 @@ const handleDelete = (i) => {
   })
 };
 
-const weatherFromReduxStore = useSelector((state) => state.weatherDetails.wea)
+
 
 useEffect(()=>{
     // fetchWeather()
-    dispatch(getweatherActionAsync(city))
+    // dispatch(getweatherActionAsync(city))
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
 // const fetchWeather=async()=>{
