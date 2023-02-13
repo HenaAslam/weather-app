@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useSelector } from 'react-redux'
 import { Form, Button, Container, Row, Col,Alert,Spinner } from "react-bootstrap";
 import { useDispatch } from 'react-redux'
@@ -13,7 +13,7 @@ const Weather = () => {
 
   const [weather, setWeather] = useState({});
   const [city, setCity] = useState("Hamburg");
-  const [cities, setCities] = useState([]);
+  // const [cities, setCities] = useState([]);
   const [error, setError] = useState(null);
   const dispatch = useDispatch()
   const[isLoading,setIsLoading]=useState(false)
@@ -25,7 +25,9 @@ const Weather = () => {
     setWeather({});
     setError(null);
     // fetchWeather();
+    setIsLoading(true)
     dispatch(getweatherActionAsync(city))
+    setIsLoading(false)
     setCity("")
 };
 const weatherFromReduxStore = useSelector((state) => state.weatherDetails.wea)
@@ -42,11 +44,11 @@ const handleDelete = (i) => {
 
 
 
-useEffect(()=>{
-    // fetchWeather()
-    // dispatch(getweatherActionAsync(city))
-// eslint-disable-next-line react-hooks/exhaustive-deps
-},[])
+// useEffect(()=>{
+//     // fetchWeather()
+//     // dispatch(getweatherActionAsync(city))
+// // eslint-disable-next-line react-hooks/exhaustive-deps
+// },[])
 // const fetchWeather=async()=>{
 //     try {
 //       setIsLoading(true)
