@@ -1,8 +1,11 @@
 
 import { useEffect, useState } from "react";
+import { useSelector } from 'react-redux'
 import { Form, Button, Container, Row, Col,Alert,Spinner } from "react-bootstrap";
-
+import { useDispatch } from 'react-redux'
  import Details from './Details'
+ import {getweatherActionAsync} from '../redux/action'
+
 
   import TimeandDate from "./TimeandDate"
 
@@ -12,63 +15,70 @@ const Weather = () => {
   const [city, setCity] = useState("Hamburg");
   const [cities, setCities] = useState([]);
   const [error, setError] = useState(null);
-
+  const dispatch = useDispatch()
   const[isLoading,setIsLoading]=useState(false)
+ 
   
 
   const handleSubmit =  (event) => {
     event.preventDefault();
     setWeather({});
     setError(null);
-    fetchWeather();
+    // fetchWeather();
+    dispatch(getweatherActionAsync(city))
     setCity("")
 };
 
 const handleDelete = (i) => {
   const newCities = [...cities];
   newCities.splice(i, 1);
-  setCities(newCities);
+  // setCities(newCities);
+  dispatch({
+    type:"DELETE",
+    payload:newCities
+  })
 };
 
-
+const weatherFromReduxStore = useSelector((state) => state.weatherDetails.wea)
 
 useEffect(()=>{
-    fetchWeather()
+    // fetchWeather()
+    dispatch(getweatherActionAsync(city))
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
-const fetchWeather=async()=>{
-    try {
-      setIsLoading(true)
-        const response = await fetch(
-          `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0fe4d1536d77cdbc2bf8d6d7e5c8a79f`
-        );
-        const data = await response.json();
+// const fetchWeather=async()=>{
+//     try {
+//       setIsLoading(true)
+//         const response = await fetch(
+//           `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0fe4d1536d77cdbc2bf8d6d7e5c8a79f`
+//         );
+//         const data = await response.json();
     
-        setWeather(data);
-        // setIsLoading(false)
-        // console.log(data)
+//         setWeather(data);
+//         // setIsLoading(false)
+//         // console.log(data)
 
 
-          // setCities([...cities,cities.splice(0,0,data)])
-          // setCities([...cities, data]);
+//           // setCities([...cities,cities.splice(0,0,data)])
+//           // setCities([...cities, data]);
 
 
 
-// let newCountries = [].concat("Mali", countries, "Kenya");
+// // let newCountries = [].concat("Mali", countries, "Kenya");
 
-setCities([].concat(data,...cities))
-setIsLoading(false)
+// setCities([].concat(data,...cities))
+// setIsLoading(false)
 
-          // console.log(cities)
+//           // console.log(cities)
         
-          // arr.splice(2, 0, "Lene");
+//           // arr.splice(2, 0, "Lene");
     
-      } catch (error) {
-        setError(error);
-        // setIsLoading(false)
+//       } catch (error) {
+//         setError(error);
+//         // setIsLoading(false)
        
-      }
-}
+//       }
+// }
 
 
 
@@ -143,12 +153,12 @@ setIsLoading(false)
         
        
       </Alert>)}
-      {weather.name && (
+      {weatherFromReduxStore.length>0 && (
         <>
        
     
 
-                 {cities.map((cityData, index) => (
+                 {weatherFromReduxStore.map((cityData, index) => (
         
       //  <Details city={weather} />
    
