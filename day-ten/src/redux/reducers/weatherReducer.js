@@ -1,9 +1,11 @@
 
 
-import { GET_WEATHER } from "../action"
+import { GET_WEATHER, GET_WEATHER_ERROR, GET_WEATHER_LOADING, DELETE } from "../action"
 
 const initialState = {
-    wea:[]
+    wea:[],
+    isLoading:false,
+    isError:false
 }
  const weatherReducer=(state=initialState, action)=>
  {
@@ -15,11 +17,23 @@ const initialState = {
       }
 
       
-      case "DELETE":
+    
+    case DELETE :
         return{
           ...state,
           wea:action.payload
         }
+      
+      case GET_WEATHER_LOADING:
+        return{
+          ...state,
+          isLoading:action.payload
+        }
+        case GET_WEATHER_ERROR:
+          return{
+            ...state,
+            isError:action.payload
+          }
 
 
     default:

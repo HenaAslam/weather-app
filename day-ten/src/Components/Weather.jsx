@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Form, Button, Container, Row, Col,Alert,Spinner } from "react-bootstrap";
 import { useDispatch } from 'react-redux'
  import Details from './Details'
- import {getweatherActionAsync} from '../redux/action'
+ import { deleteAction, getweatherActionAsync} from '../redux/action'
 
 
   import TimeandDate from "./TimeandDate"
@@ -14,20 +14,21 @@ const Weather = () => {
   const [weather, setWeather] = useState({});
   const [city, setCity] = useState("Hamburg");
   // const [cities, setCities] = useState([]);
-  const [error, setError] = useState(null);
+  
   const dispatch = useDispatch()
-  const[isLoading,setIsLoading]=useState(false)
  
+ const applicationSpinner =useSelector((state)=>state.weatherDetails.isLoading)
+ const applicationError=useSelector((state)=>state.weatherDetails.isError)
   
 
   const handleSubmit =  (event) => {
     event.preventDefault();
     setWeather({});
-    setError(null);
+   
     // fetchWeather();
-    setIsLoading(true)
+   
     dispatch(getweatherActionAsync(city))
-    setIsLoading(false)
+   
     setCity("")
 };
 const weatherFromReduxStore = useSelector((state) => state.weatherDetails.wea)
@@ -36,10 +37,7 @@ const handleDelete = (i) => {
   newCities=[...newCities.slice(0, i), ...newCities.slice(i + 1)]
  
   // setCities(newCities);
-  dispatch({
-    type:"DELETE",
-    payload:newCities
-  })
+  dispatch(deleteAction(newCities))
 };
 
 
@@ -92,7 +90,10 @@ const handleDelete = (i) => {
 
   return (
     <>
-         <div className="text-center mt-4">{isLoading&& (  <Spinner animation="border" variant="warning" />)}</div>
+
+  
+         <div className="text-center mt-4">{applicationSpinner && <Spinner animation="border" variant="success"/>}</div>
+         <div className="text-center mt-4">{applicationError && <Alert variant="danger">Something's wrong..😒</Alert>}</div>
     <h2 className="main-title mb-4 ml-5 mt-5">Weather in your city</h2>
      <TimeandDate city={weather}/>
     <hr></hr>
@@ -140,10 +141,10 @@ const handleDelete = (i) => {
         </Col>
       </Row>
       </Container>
-      {error && (
+      {applicationError && (
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <p className="text-danger">{error.message}</p>
+            <p className="text-danger">{applicationError.message}</p>
           </Col>
         </Row>
       )}
@@ -156,7 +157,7 @@ const handleDelete = (i) => {
         
        
       </Alert>)}
-      {weatherFromReduxStore.length>0 && (
+      {/* {weatherFromReduxStore.length>0 && (
         <>
        
     
@@ -172,7 +173,24 @@ const handleDelete = (i) => {
        ))}
       
         </>
-      )}
+      )} */}
+       {weatherFromReduxStore.length>0 ? (
+        <>
+       
+    
+
+                 {weatherFromReduxStore.map((cityData, index) => (
+        
+      //  <Details city={weather} />
+   
+      <Details key={index} city={cityData} delete={handleDelete} del={index} />
+  
+
+
+       ))}
+      
+        </>
+      ) : <Alert variant="success" className=" text-center">Please enter a city name to see the weather details</Alert>}
        
     
     </>
